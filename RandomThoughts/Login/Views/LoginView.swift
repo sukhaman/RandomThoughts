@@ -19,25 +19,25 @@ struct LoginView: View {
             ZStack {
                 VStack {
                     Image(systemName: "person.circle.fill")
-                                       .resizable()
-                                       .aspectRatio(contentMode: .fit)
-                                       .frame(width: 100, height: 100)
-                                       .foregroundColor(.green)
-                                       .padding()
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 100, height: 100)
+                        .foregroundColor(.green)
+                        .padding()
                     
-                        TextField("Username", text: $viewModel.username)
-                            .padding()
+                    TextField("Username", text: $viewModel.username)
+                        .padding()
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .background(Color.white)
-                                            .cornerRadius(8)
-                                            .shadow(radius: 3)
-
-                        SecureField("Password", text: $viewModel.password)
-                            .padding()
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .background(Color.white)
-                                                .cornerRadius(8)
-                                                .shadow(radius: 3)
+                        .cornerRadius(8)
+                        .shadow(radius: 3)
+                    
+                    SecureField("Password", text: $viewModel.password)
+                        .padding()
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .background(Color.white)
+                        .cornerRadius(8)
+                        .shadow(radius: 3)
                     
                     
                     
@@ -45,17 +45,17 @@ struct LoginView: View {
                         viewModel.fetchLoginData()
                     }) {
                         Text("Login")
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity, minHeight: 50)
-                        .background(Color.blue)
-                        .cornerRadius(8)
-                        .shadow(radius: 3)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity, minHeight: 50)
+                            .background(Color.blue)
+                            .cornerRadius(8)
+                            .shadow(radius: 3)
                     }
                     .alert(isPresented: $showAlert) {
                         Alert(title: Text("Error"), message: Text(viewModel.errorMessage ?? ""), dismissButton: .default(Text("OK")))
                         
                     }
-                   
+                    
                     .fullScreenCover(isPresented: $isLoggedIn) {
                         if let viewData {
                             HomeView(user: viewData)

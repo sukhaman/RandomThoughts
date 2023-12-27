@@ -12,8 +12,9 @@ struct RandomThoughtsApp: App {
     @StateObject private var authenticationManager = AuthenticationManager()
     var body: some Scene {
         WindowGroup {
-             SplashView()
-                .environmentObject(authenticationManager)
+            DealDetailView(addressList: AddressList(list: [Address(id: 123, primaryAddress: true, streetAddress: "1234 Prospect Street", suite: nil, city: "Norwalk", state: "NY", zipcode: "12345", housingstatus: "Rent", durationYears: 2, durationMonths: 2, monthlyPayment: "1234.55"),Address(id: 123, primaryAddress: true, streetAddress: "14 Summer Street", suite: nil, city: "Stamford", state: "NY", zipcode: "06903", housingstatus: "", durationYears: 3, durationMonths: 2, monthlyPayment: "2234.55"),Address(id: 123, primaryAddress: true, streetAddress: "34 Other Street", suite: nil, city: "Bridgeport", state: "NY", zipcode: "06604", housingstatus: "", durationYears: 4, durationMonths: 2, monthlyPayment: "3234.55")]))
+             //SplashView()
+                //.environmentObject(authenticationManager)
         }
     }
 }
