@@ -19,3 +19,11 @@ func createUserObject() -> [String: Any?] {
         "user_type": "customer"
     ]
 }
+
+func createDealListObject() -> [String: Any?] {
+    [
+        "id" : 1,
+        "status": "active",
+        "buyer": createUserObject()
+    ]
+}

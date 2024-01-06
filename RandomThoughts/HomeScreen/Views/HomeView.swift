@@ -9,11 +9,12 @@ import SwiftUI
 
 struct HomeView: View {
     var user: User
+    var dealList: DealList
     @EnvironmentObject private var authenticationManager: AuthenticationManager
     var body: some View {
         
         if authenticationManager.isAuthenticated {
-            CustomTabView(user: user)
+            SplitView(user: user,dealList: dealList)
         } else {
             LoginView(viewModel: LoginViewModel(MockLoginService()))
         }
@@ -22,38 +23,7 @@ struct HomeView: View {
     }
 }
 
-struct CustomTabView: View {
-    var user: User
-    var body: some View {
-        TabView {
-            // First Tab
-            
-            ContentView()
-                .tabItem {
-                    Image(systemName: "house.fill")
-                    Text("Home")
-                }
-            
-            // Second Tab
-            Text("Second Tab")
-                .tabItem {
-                    Image(systemName: "star.fill")
-                    Text("Favorites")
-                }
-            
-            // Third Tab
-            ProfileView(user: user)
-                .tabItem {
-                    Image(systemName: "person.fill")
-                    Text("Profile")
-                }
-        }
-    }
-}
-
-
-
 
 #Preview {
-    HomeView(user: User(id: 2, firstName: "First", lastName: "Last", username: "First Last", email: "john.doe@example.com"))
+    HomeView(user: User(id: 3, firstName: "First", lastName: "Last", username: "Usernam", email: "emai@test.com"), dealList: DealList(results: [Deal(id: 1, status: "active", buyer: User(id: 3, firstName: "First", lastName: "Last", username: "Usernam", email: "emai@test.com"))]))
 }

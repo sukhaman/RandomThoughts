@@ -23,6 +23,7 @@ enum APIEndpoint: RawRepresentable, APIEndPointProtocol {
     case getUser(_ id: String)
     case postComment(_ postID: String)
     case forgotPassword
+    case getDeal
 
     var rawValue: String {
         switch self {
@@ -30,7 +31,7 @@ enum APIEndpoint: RawRepresentable, APIEndPointProtocol {
         case .forgotPassword: return "forgotpassword/"
         case .getUser(let id): return "users/\(id)/"
         case .postComment(let postID): return "posts/\(postID)/comments/"
-        
+        case .getDeal: return "deal/"
         }
     }
 

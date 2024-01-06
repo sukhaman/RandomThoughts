@@ -37,6 +37,7 @@
 		A2BEBDE32B3B2A0800DBA7FC /* FlippingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BEBDE22B3B2A0800DBA7FC /* FlippingPageView.swift */; };
 		A2BEBDE72B3B6B4300DBA7FC /* DealDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BEBDE62B3B6B4300DBA7FC /* DealDetailView.swift */; };
 		A2BEBDEA2B3B6B7900DBA7FC /* Deal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BEBDE92B3B6B7900DBA7FC /* Deal.swift */; };
+		A2BEBDEE2B3CCF1300DBA7FC /* EmploymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2BEBDED2B3CCF1300DBA7FC /* EmploymentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		A2BEBDE22B3B2A0800DBA7FC /* FlippingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlippingPageView.swift; sourceTree = "<group>"; };
 		A2BEBDE62B3B6B4300DBA7FC /* DealDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealDetailView.swift; sourceTree = "<group>"; };
 		A2BEBDE92B3B6B7900DBA7FC /* Deal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deal.swift; sourceTree = "<group>"; };
+		A2BEBDED2B3CCF1300DBA7FC /* EmploymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmploymentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 		A2BEBD7C2B3663F000DBA7FC /* RandomThoughts */ = {
 			isa = PBXGroup;
 			children = (
+				A2BEBDEB2B3CCEE500DBA7FC /* Employment */,
 				A2BEBDE42B3B6B2B00DBA7FC /* DealDetail */,
 				A2BEBDDE2B3A650F00DBA7FC /* Utitlites */,
 				A2BEBDDA2B3A15D500DBA7FC /* Address */,
@@ -378,6 +381,22 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		A2BEBDEB2B3CCEE500DBA7FC /* Employment */ = {
+			isa = PBXGroup;
+			children = (
+				A2BEBDEC2B3CCEF500DBA7FC /* Views */,
+			);
+			path = Employment;
+			sourceTree = "<group>";
+		};
+		A2BEBDEC2B3CCEF500DBA7FC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A2BEBDED2B3CCF1300DBA7FC /* EmploymentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -521,6 +540,7 @@
 				A2BEBDC92B37307400DBA7FC /* SplitView.swift in Sources */,
 				A2BEBDC72B37149D00DBA7FC /* MockLoginService.swift in Sources */,
 				A2BEBDB42B3665FD00DBA7FC /* NetworkService.swift in Sources */,
+				A2BEBDEE2B3CCF1300DBA7FC /* EmploymentView.swift in Sources */,
 				A2BEBDEA2B3B6B7900DBA7FC /* Deal.swift in Sources */,
 				A2BEBDE72B3B6B4300DBA7FC /* DealDetailView.swift in Sources */,
 				A2BEBDC62B37149A00DBA7FC /* MockServiceResponse.swift in Sources */,
@@ -706,7 +726,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.2;
@@ -744,7 +764,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 14.2;

@@ -13,6 +13,7 @@ class LoginViewModel: ObservableObject {
     @Published var password = ""
     @Published var errorMessage: String?
     @Published var userData: User?
+    @Published var dealListData: DealList?
     var service: LoginService
     private var canccelables: Set<AnyCancellable> = []
     init(_ service: LoginService) {
@@ -46,6 +47,27 @@ class LoginViewModel: ObservableObject {
                 }
             } receiveValue: { user in
                 self.userData = user
+            }
+            .store(in: &canccelables)
+
+    }
+    
+    func fetchDealList() {
+        
+        let endpoint = APIEndpoint.getDeal.url
+        let request = RequestBuilder.get(from: endpoint)
+        let publisher = service.fetchDealList(request)
+        
+        publisher
+            .sink { completion  in
+                switch completion {
+                case .failure(let error):
+                    self.errorMessage = error.localizedDescription
+                case .finished:
+                    break
+                }
+            } receiveValue: { dealList in
+                self.dealListData = dealList
             }
             .store(in: &canccelables)
 

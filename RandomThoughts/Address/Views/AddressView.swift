@@ -14,15 +14,18 @@ struct AddressView: View {
     @State var address: Address
     @State var viewHeight: CGFloat = 345.0
     @State var addressViewHeight: CGFloat = 150
-    let segments = ["Current Address", "Previous", "Second Previous"]
+    let segments = ["Current", "Previous", "Second Previous"]
+    
     var body: some View {
         GeometryReader { geometryReader in
             ZStack {
                
                 VStack {
                     
-                    AddressHeaderView()
-                    AddressSegmentView { value in
+                    HeaderView(iconName: "star.circle.fill", title: "ADDRESS INFORMATION", buttonTitle: addressList.list.count == 0 ? "ADD" : "UPDATE", buttonAction: {
+                        
+                    })
+                    SegmentView { value in
                         address = addressList.list[value]
                         selectedSegment = value
                         withAnimation(.easeInOut(duration: 0.5)) {
@@ -41,7 +44,7 @@ struct AddressView: View {
                         .offset(y: selectedSegment == 0 ? 0 : -40)
                     
                 }
-                .frame(height: viewHeight)
+                .frame(maxWidth: .infinity, maxHeight: viewHeight)
                 .padding()
                 .background(Color.white)
                 .cornerRadius(8)
@@ -51,102 +54,6 @@ struct AddressView: View {
         }
     }
 }
-
-
-
-/*
-struct AddressView: View {
-    @State var addressList: AddressList
-    @State var address: Address
-    @State var selectedSegment = 0
-    @State var viewHeight: CGFloat = 345.0
-    @State var addressViewHeight: CGFloat = 150
-    let options = ["Current Address", "Previous", "Second Previous"]
-    var body: some View {
-        
-        ZStack {
-            GeometryReader { geometryReader in
-                VStack {
-                    
-                    HStack {
-                                Image(systemName: "house.fill")
-                                    .foregroundColor(.yellow)
-                                    .font(.system(size: 30))
-
-                                Text("ADDRESS INFORMATION")
-                                    .font(.body)
-                                    
-
-                                Spacer()
-
-                                Button(action: {
-                                    // Handle button action
-                                }) {
-                                    Text("UPDATE")
-                                        .foregroundColor(.white)
-                                        .padding(8)
-                                        .background(Color.blue)
-                                        .cornerRadius(8)
-                                }
-                            }
-                    .frame(maxWidth: geometryReader.size.width, maxHeight: 40)
-                    .background(Color.white)
-                    .padding()
-                    Picker("", selection: $selectedSegment) {
-                        ForEach(0..<options.count, id: \.self) {
-                            Text(options[$0])
-                            
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                    .onChange(of: selectedSegment) { addressIndex in
-                        self.address = addressList.list[selectedSegment]
-                        // Perform your action when the picker value changes
-                        withAnimation(.easeInOut(duration: 0.5)) {
-                            if selectedSegment == 0 {
-                                viewHeight = 345
-                                addressViewHeight = 150
-                            } else {
-                                viewHeight = 315
-                                addressViewHeight = 100
-                            }
-                        }
-                    }
-                    HStack(spacing:6) {
-                        Image(systemName: "checkmark.square")
-                            .foregroundColor(.yellow)
-                            .padding()
-                            .opacity(selectedSegment != 0 ? 0 : 1)
-                        Text(" Register to Address")
-                            .foregroundStyle(Color.green)
-                            .font(.title2)
-                            .opacity(selectedSegment != 0 ? 0 : 1)
-                        Spacer()
-                    }
-                    
-                    .frame(width: geometryReader.size.width, height: 25, alignment: .center)
-                    // .frame(width: geometryReader.size.width, height: 30, alignment: .center)
-                    AddressSecondaryView(address:address, height: addressViewHeight, width: geometryReader.size.width)
-                }
-                .frame(maxWidth: geometryReader.size.width,maxHeight: viewHeight)
-                .background(Color.white)
-                .cornerRadius(8)
-                .shadow(radius: 3)
-                
-                
-                
-                
-                
-            }
-            .padding()
-            .ignoresSafeArea(.all)
-            .background(Color.white)
-            //.frame(width: geometryReader.size.width, height: geometryReader.size.height, alignment: .center)
-        }
-        
-    }
-}
-*/
 
 #Preview {
     AddressView(addressList: AddressList(list: []), address: Address(id: 123, primaryAddress: true, streetAddress: "1234 Prospect Street", suite: nil, city: "Norwalk", state: "NY", zipcode: "12345", housingstatus: "Rent", durationYears: 2, durationMonths: 2, monthlyPayment: "1234.55"))
@@ -194,7 +101,7 @@ struct AddressSecondaryView: View {
                     .lineLimit(2)
                 Spacer()
             }
-            .frame(width:width - 5,height: 50)
+            .frame(maxWidth:.infinity,maxHeight: 50)
                 HStack(alignment: .center,spacing: 6) {
                     Text("Housing Status")
                         .font(.headline)
@@ -227,22 +134,27 @@ struct AddressSecondaryView: View {
     }
 }
 
-struct AddressHeaderView: View {
+struct HeaderView: View {
+    @State var iconName: String
+    @State var title: String
+    @State var buttonTitle: String
+    var buttonAction: () -> Void
     var body: some View {
         HStack(spacing:16) {
-            Image(systemName: "star.circle.fill")
-                .foregroundColor(.yellow)
+            Image(systemName: iconName)
+                .foregroundColor(.white)
                 .font(.system(size: 30))
             
-            Text("ADDRESS INFORMATION")
+            Text(title)
                 .font(.headline)
                 .lineLimit(1)
                 .fixedSize(horizontal: true, vertical: false)
             
             Button(action: {
                 // Handle button action
+                self.buttonAction()
             }) {
-                Text("Update")
+                Text(buttonTitle)
                     .foregroundColor(.white)
                     .fixedSize(horizontal: true, vertical: false)
                     .padding(8)
@@ -254,9 +166,9 @@ struct AddressHeaderView: View {
     }
 }
 
-struct AddressSegmentView: View {
+struct SegmentView: View {
     @State private var selectedSegment = 0
-    let segments = ["Current Address", "Previous", "Second Previous"]
+    @State var segments = ["Current", "Previous", "Second Previous"]
     var buttonAction: (Int) -> Void
     var body: some View {
         Picker("Select an option", selection: $selectedSegment) {
@@ -264,6 +176,7 @@ struct AddressSegmentView: View {
                 Text(segments[$0])
             }
         }
+        .frame(maxWidth: .infinity)
         .pickerStyle(SegmentedPickerStyle())
         .onChange(of: selectedSegment) { newValue in
             self.buttonAction(newValue)

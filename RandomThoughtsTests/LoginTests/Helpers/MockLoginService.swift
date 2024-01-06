@@ -14,7 +14,6 @@ class MockLoginService: LoginService {
     var errorToReturn: Error?
     
     override func fetchData<T>(from request: URLRequest) -> AnyPublisher<T, Error> where T : Decodable {
-        print("Request method \(request.httpMethod ?? "") at endpoint \(request.url!)")
         if let url = request.url {
             switch url {
             case APIEndpoint.login.url:
@@ -26,6 +25,10 @@ class MockLoginService: LoginService {
                   } else {
                       dataToReturn = try! JSONSerialization.data(withJSONObject: createUserObject())
                   }
+            case APIEndpoint.getDeal.url:
+                let result = ["results": [createDealListObject()]]
+                let data = try! JSONSerialization.data(withJSONObject: result)
+                dataToReturn = data
             default:
                 errorToReturn = NSError(domain: "Bad Request", code: 42, userInfo: ["detail": "You have provider wrong email"])
             }

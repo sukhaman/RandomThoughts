@@ -32,6 +32,10 @@ class LoginService {
         return fetchData(from: request)
     }
     
+    func fetchDealList(_ request: URLRequest) -> AnyPublisher<DealList,Error> {
+        return fetchData(from: request)
+    }
+    
     func fetchProfileData(_ request: URLRequest) -> AnyPublisher<User,Error> {
         return fetchData(from: request)
     }

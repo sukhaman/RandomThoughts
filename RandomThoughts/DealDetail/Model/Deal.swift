@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct Deal: Codable {
+struct DealList: Equatable, Codable {
+    let results: [Deal]
+}
+
+struct Deal: Equatable, Codable {
     let id: Int
     let status: String
     let buyer: User
@@ -46,8 +50,11 @@ struct Address: Codable {
     }
 }
 
+struct EmploymentList: Codable {
+    let list: [Employment]
+}
 struct Employment: Codable {
-    let id: String
+    let id: Int
     let name: String
     let jobTitle: String
     let address: String?
@@ -58,6 +65,11 @@ struct Employment: Codable {
     let grossIncome: String?
     let salaryType: String?
     let status: String?
+    let durationYears: Int
+    let durationMonths: Int?
+    let phoneNumber: String?
+    let paidType: String?
+    
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -71,6 +83,10 @@ struct Employment: Codable {
         case grossIncome = "gross_income"
         case salaryType = "salary_type"
         case status
+        case durationYears = "duration_years"
+        case durationMonths = "duration_months"
+        case phoneNumber = "phone_number"
+        case paidType = "method_of_payment"
     }
 }
 
@@ -147,5 +163,29 @@ extension Address {
     
     func showMonthlyPaymentWIthCurrency() -> String {
         return "$ \(monthlyPayment)"
+    }
+}
+
+
+extension Employment {
+    
+    func employmentDuration() -> String {
+        if let durationMonths {
+            return "\(durationYears) Yrs \(durationMonths) Mos"
+        } else {
+            return "\(durationYears) Yrs"
+        }
+    }
+    
+    func showEmployerCompleteAddress() -> String {
+        if let address, let city, let state, let zipcode, let suite {
+            return "\(address),\(suite) ,\(city), \(state), \(zipcode)"
+        } else {
+            if let address, let city, let state, let zipcode {
+                return "\(address), \(city), \(state), \(zipcode)"
+            } else {
+                return "-"
+            }
+        }
     }
 }

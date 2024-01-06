@@ -12,6 +12,7 @@ struct LoginView: View {
     @ObservedObject var viewModel: LoginViewModel
     @State private var isLoggedIn = false
     @State private var viewData: User?
+    @State private var dealListData: DealList?
     @State var showAlert = false
     @EnvironmentObject private var authenticationManager: AuthenticationManager
     var body: some View {
@@ -43,6 +44,7 @@ struct LoginView: View {
                     
                     Button(action: {
                         viewModel.fetchLoginData()
+                        viewModel.fetchDealList()
                     }) {
                         Text("Login")
                             .foregroundColor(.white)
@@ -57,8 +59,8 @@ struct LoginView: View {
                     }
                     
                     .fullScreenCover(isPresented: $isLoggedIn) {
-                        if let viewData {
-                            HomeView(user: viewData)
+                        if let viewData, let dealListData {
+                            HomeView(user: viewData, dealList: dealListData)
                         }
                     }
                     
@@ -69,6 +71,11 @@ struct LoginView: View {
                 .onChange(of: viewModel.userData) { newData in
                     // Update the @State property when the ViewModel's @Published property changes
                     viewData = newData
+                    
+                }
+                .onChange(of: viewModel.dealListData) { newData in
+                    // Update the @State property when the ViewModel's @Published property changes
+                    dealListData = newData
                     isLoggedIn = true
                     authenticationManager.isAuthenticated = true
                 }
